@@ -22,9 +22,6 @@ function Navbar() {
   return (
     <nav className={`lp-navbar${scrolled ? " lp-navbar--scrolled" : ""}`}>
       <div className="lp-navbar__inner">
-        <button className="lp-navbar__login" onClick={() => navigate("/login")}>
-          Login
-        </button>
         <div className="lp-navbar__logo" onClick={() => scrollTo("home")}>
           <span className="lp-navbar__hex">⬡</span>
           <span className="lp-navbar__brand">PlaceHub</span>
@@ -40,6 +37,9 @@ function Navbar() {
             </button>
           ))}
         </div>
+        <button className="lp-navbar__login" onClick={() => navigate("/login")}>
+          Login
+        </button>
       </div>
     </nav>
   );
@@ -52,10 +52,10 @@ function Hero() {
     document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
 
   const floatingCards = [
-    { company: "Google", role: "SDE II", ctc: "45 LPA", color: "#4285F4", initials: "G", delay: "0s", top: "8%", right: "2%" },
-    { company: "Microsoft", role: "Engineer", ctc: "38 LPA", color: "#00A4EF", initials: "M", delay: "0.5s", top: "36%", right: "10%" },
-    { company: "Amazon", role: "SDE I", ctc: "32 LPA", color: "#FF9900", initials: "A", delay: "1s", top: "62%", right: "0%" },
-    { company: "Infosys", role: "Analyst", ctc: "8 LPA", color: "#007CC3", initials: "I", delay: "1.5s", top: "82%", right: "14%" },
+    { company: "Google", role: "SDE II", ctc: "45 LPA", color: "#4285F4", initials: "G", delay: "0s", top: "6%", left: "55%" },
+    { company: "Microsoft", role: "Engineer", ctc: "38 LPA", color: "#00A4EF", initials: "M", delay: "0.5s", top: "30%", left: "20%" },
+    { company: "Amazon", role: "SDE I", ctc: "32 LPA", color: "#FF9900", initials: "A", delay: "1s", top: "56%", left: "48%" },
+    { company: "Infosys", role: "Analyst", ctc: "8 LPA", color: "#007CC3", initials: "I", delay: "1.5s", top: "76%", left: "10%" },
   ];
 
   return (
@@ -145,7 +145,7 @@ function Hero() {
                   "--accent": card.color,
                   "--delay": card.delay,
                   top: card.top,
-                  right: card.right,
+                  left: card.left,
                 }}
               >
                 <div
