@@ -5,6 +5,8 @@ import ShowCompany from "./Components/ShowCompany";
 import CompanyCard from "./Cards/CompanyCard";
 import CompanyRegister from "./Components/CompanyRegistration";
 import PlacementRegistration from "./Pages/PlacementRegistration";
+import AdminDashboard from "./Pages/AdminDashboard";
+import StudentDashboard from "./Pages/StudentDashboard";
 import "./App.css";
 
 // ─── Simple auth guard ──────────────────────────────────────────────────────
@@ -21,6 +23,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         {/* ── Public ── */}
+
+      
+
         <Route path="/"        element={<LandingPage />} />
         <Route path="/login"   element={<LoginPage />} />
         <Route path="/register" element={<PlacementRegistration />} />
@@ -30,7 +35,8 @@ function App() {
           path="/student/dashboard"
           element={
             <ProtectedRoute allowedRole="student">
-              <CompanyCard />
+              {/* <CompanyCard /> */}
+                <StudentDashboard />
             </ProtectedRoute>
           }
         />
@@ -40,7 +46,8 @@ function App() {
           path="/admin/dashboard"
           element={
             <ProtectedRoute allowedRole="admin">
-              <ShowCompany />
+              {/* <ShowCompany /> */}
+              <AdminDashboard />
             </ProtectedRoute>
           }
         />
