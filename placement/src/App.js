@@ -1,12 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
-import ShowCompany from './Components/ShowCompany';
-import CompanyCard from './Components/Cards/CompanyCard';
 import CompanyRegister from './Components/CompanyRegistration';
+import CompanyDashboard from './Cards/CompanyDashboard';
 function App() {
   return (
     <>
-   <CompanyCard/>
+   <CompanyDashboard/>
    <CompanyRegister/>
    </>
   );

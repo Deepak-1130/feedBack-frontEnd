@@ -29,7 +29,7 @@ function ShowCompany() {
     }
 
     useEffect(() => {
-        getCompanies();
+        getCompanies(); 
     }, []);
 
     return (
