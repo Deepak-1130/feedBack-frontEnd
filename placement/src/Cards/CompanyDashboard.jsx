@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./companyDashboard.css";
+import "../StyleSheets/CompanyDashboard.css";
 
 function CompanyDashboard() {
   const [companies, setCompanies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState("");
 
   useEffect(() => {
     axios.get("http://localhost:8080/getCompany")
@@ -22,15 +23,31 @@ function CompanyDashboard() {
     return <div className="container"><p>Loading companies...</p></div>;
   }
 
+  const filteredCompanies = companies.filter((company) => {
+    const q = searchValue.trim().toLowerCase();
+    if (!q) return true;
+    return (
+      (company.companyName || "").toLowerCase().includes(q) ||
+      (company.branch || "").toLowerCase().includes(q) ||
+      String(company.lastHighestPackage || "").toLowerCase().includes(q)
+    );
+  });
+
   return (
     <div className="container">
       <div className="page-header">
         <h1>Our Recruiters</h1>
-        <input type="text" className="search-box" placeholder="Search........" />
+        <input
+          type="text"
+          className="search-box"
+          placeholder="Search by company, branch, or package..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
       </div>
 
       <div className="grid">
-        {companies.map(company => (
+        {filteredCompanies.map(company => (
           <div className="card" key={company.companyId}>
             <div className="card-header">
               <div className="logo-section">
