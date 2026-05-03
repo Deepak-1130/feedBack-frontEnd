@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '.StyleSheets/companyRegister.css';
+import '../StyleSheets/CompanyRegistration.css';
 
 const CompanyRegister = () => {
 
@@ -84,7 +84,7 @@ const CompanyRegister = () => {
     <div className="register-container">
       <form onSubmit={handleSubmit} className="register-form">
         <div className="register-header">
-          <p className="register-eyebrow">Placement Portal</p>
+          {/* <p className="register-eyebrow">Placement Portal</p> */}
           <h2>Company Registration</h2>
          
         </div>
