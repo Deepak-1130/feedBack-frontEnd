@@ -1,9 +1,13 @@
 import React from "react";
 import "../StyleSheets/CompanyDashboard.css";
-
+import { useNavigate } from "react-router-dom";
 const CompanyCard = ({ company }) => {
+    const navigate = useNavigate();
+function handleViewDetails(){
 
-
+    window.open(`http://www.${company.companyName}.com`)
+    
+}
     return (
 
                  <div className="card" key={company.companyId}>
@@ -38,7 +42,7 @@ const CompanyCard = ({ company }) => {
               </div>
             </div>
 
-            <button className="view-btn">View Details</button>
+            <button  onClick={handleViewDetails}className="view-btn">View Details</button>
           </div>
         
 
