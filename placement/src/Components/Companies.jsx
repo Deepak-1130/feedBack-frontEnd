@@ -11,7 +11,9 @@ export default function Companies() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [activeFilter, setActiveFilter] = useState("ALL");
+  const [filterType, setFilterType] = useState("");
   const navigate = useNavigate();
+  const [searchValue, setSearchValue] = useState("");
 
   const fetchAll = async () => {
     setLoading(true);
@@ -27,6 +29,25 @@ export default function Companies() {
       setLoading(false);
     }
   };
+const filteredCompanies=companies.filter((company)=>{
+  const type = filterType.trim().toLowerCase();
+  if(!type) return true;
+  return(company.type || "").toLowerCase().includes(type);
+})
+
+
+const filterCompaniesFinal=filteredCompanies.filter((company)=>{
+  const value = searchValue.trim().toLowerCase();
+  if(!value) return true ;
+  return(
+    (
+       (company.companyName|| "").toLowerCase().includes(value)||
+       (company.branch||"").toLowerCase().includes(value)||
+       String((company.lastHighestPackage||"")).toLowerCase().includes(value)
+
+    )
+  )
+})
 
   const fetchByType = async (type) => {
     setLoading(true);
@@ -66,22 +87,22 @@ export default function Companies() {
         </p>
 
         <div className="lp-filter-bar">
-          {["ALL", "IT", "CORE"].map((f) => (
-            <button
-              key={f}
-              className={`lp-filter-btn${activeFilter === f ? " lp-filter-btn--active" : ""}`}
-              onClick={() => handleFilter(f)}
-            >
-              {f === "ALL" ? "All Companies" : f === "IT" ? "💻 IT" : "⚙️ CORE"}
-            </button>
-          ))}
+          <select onChange={(e) => handleFilter(e.target.value)} className="search-box">
+            <option className="search-box" value="ALL">All Company</option>
+            <option className="search-box" value="IT">IT</option>
+            <option className="search-box" value="CORE_CIVIL">Core Civil</option>
+            <option className="search-box" value="CORE_MECH">Core Mechanical</option>
+            <option className="search-box" value="CORE_EEE">Core Electrical</option>
+          </select>
+          
 
-          <button
-            className="lp-filter-btn lp-filter-btn--search"
-            onClick={() => navigate("/search")}
-          >
-            🔍 Advanced Search
-          </button>
+           <input
+          type="text"
+          className="search-box"
+          placeholder="Search by company, branch, or package..."
+          value={searchValue}
+          onChange={(e) => setSearchValue(e.target.value)}
+        />
         </div>
 
         {loading && (
@@ -126,10 +147,10 @@ export default function Companies() {
         {!loading && !error && companies.length > 0 && (
           <>
             <div className="lp-companies__count">
-              Showing <strong>{companies.length}</strong> companies
+              Showing <strong>{filterCompaniesFinal.length}</strong> companies
             </div>
             <div className="lp-companies__grid">
-              {companies.map((c) => (
+              {filterCompaniesFinal.map((c) => (
                 <CompanyCard
                   key={c.id}
                   company={c}
